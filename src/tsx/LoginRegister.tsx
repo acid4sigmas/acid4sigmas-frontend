@@ -26,7 +26,7 @@ export default function LoginRegister() {
                         <h1>FAQ</h1>
                         <details>
                             <summary>Why would i even sign up?</summary>
-                            <li>- cloud themes!</li>
+                            <li>- cloud themes! (expected feature!)</li>
                         </details>
                     </div>
                 </div>
