@@ -1,0 +1,17 @@
+{
+    "primary_color_text": "#ffffff",
+    "primary_color": "#2d2ddd",
+    "secondary_color": "#84b2e6",
+    "background_color_primary": "#08086b",
+    "background_color_secondary": "#3b3bff",
+    "background_color_tertiary": "#5e5eff",
+
+    "primary_grey": "#757575",
+    "secondary_grey": "#d1d0d0",
+
+    "font_size": "16px",
+
+    "transparency": true,
+    "transparency_value": 0.25,
+    "transparency_blur": "12px"
+}

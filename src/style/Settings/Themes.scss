@@ -1,0 +1,125 @@
+@import "../variables";
+
+.settings-themes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-themes-container-inner {
+  width: 97%;
+  height: 100%;
+}
+
+.transparency-effects-container {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+}
+
+.transparency-effects-toggle-text {
+  margin-left: auto;
+  padding-right: 12px;
+}
+
+.transparency-effects-toggle-switch {
+  --circle-dim: 1.4em;
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+  margin-top: 10px;
+}
+
+.transparency-effects-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.transparency-effects-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--secondary-grey);
+  transition: 0.3s;
+  border-radius: 30px;
+}
+
+.transparency-effects-toggle-slider-card {
+  position: absolute;
+  content: "";
+  height: var(--circle-dim);
+  width: var(--circle-dim);
+  border-radius: 20px;
+  left: 0.3em;
+  bottom: 0.3em;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.transparency-effects-toggle-slider-card > .slider-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  border-radius: 50%;
+  transition: 0.3s transform;
+}
+
+.transparency-effects-toggle-slider-card > .slider-card-front {
+  background-color: var(--primary-grey);
+}
+
+input:checked ~ .transparency-effects-toggle-slider-card > .slider-card-back {
+  background-color: var(--primary-color);
+}
+
+input:checked ~ .transparency-effects-toggle-slider-card {
+  transform: translateX(1.5em);
+}
+
+input:checked ~ .transparency-effects-toggle-slider {
+  background-color: var(--secondary-color);
+}
+
+.transparency-effects-toggle-container {
+  display: flex;
+  margin-right: 10px;
+}
+
+.transparency-effects-container-text {
+  margin-top: -12px;
+}
+
+.small-p {
+  margin-top: -20px;
+}
+
+.box {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid var(--primary-text-color);
+}
+
+.box.selected {
+  outline: 2px solid white;
+  outline-offset: -5px;
+}
+
+.accent-color-container {
+  display: flex;
+  gap: 10px; /* Optional: Add spacing between boxes */
+  justify-content: center; /* Center the boxes horizontally */
+  align-items: center; /* Center the boxes vertically */
+  flex-wrap: wrap; /* Optional: Wrap boxes to the next line if there's not enough space */
+}
