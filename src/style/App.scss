@@ -31,8 +31,14 @@ details {
     color: var(--primary-text-color);
 }
 
+span {
+    color: var(--primary-text-color);
+}
 .container {
     margin-top: 56px;
     
 }
 
+.centered-container {
+    text-align: center;
+}

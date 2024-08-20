@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import '../style/Topbar.scss';
 import NavBar from './Navbar';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function TopBar() {
-
+    const nav = useNavigate();
     const [elapse, setElapse] = useState(false);
     const location = useLocation();
 
@@ -41,7 +41,7 @@ export default function TopBar() {
             </div>
             <div className='user-login-container'>
                 <div className='user-login-container-inner'>
-                    <button className='user-login-btn'>Login</button>
+                    <button className='user-login-btn' onClick={() => nav('/register_or_login')}>Login</button>
                 </div>
             </div>
             
