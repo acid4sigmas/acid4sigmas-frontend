@@ -39,6 +39,11 @@ export default function TopBar() {
                     <h3>{pageName}</h3>
                 </div>
             </div>
+            <div className='user-login-container'>
+                <div className='user-login-container-inner'>
+                    <button className='user-login-btn'>Login</button>
+                </div>
+            </div>
             
         </div>
     </div>
