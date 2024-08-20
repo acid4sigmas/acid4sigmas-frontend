@@ -1,8 +1,11 @@
 import TopBar from "./Topbar";
 
 import '../style/LoginRegister.scss'
+import { useNavigate } from "react-router-dom";
 
 export default function LoginRegister() {
+    const nav = useNavigate();
+
     return (
     <div>
         <TopBar />
@@ -12,7 +15,7 @@ export default function LoginRegister() {
                 <h1>Your Acid4Sigmas Account</h1>
                 <div className="login-or-register-container">
                     <div className="login-or-register-btn-div">
-                        <button className="real-login-btn">Login</button>
+                        <button className="real-login-btn" onClick={() => nav("/auth/login")}>Login</button>
                     </div>
                     <span>or</span>
                     <div className="login-or-register-btn-div">
