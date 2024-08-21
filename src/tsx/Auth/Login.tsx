@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TopBar from "../Topbar";
 import config from '../../config.json';
+import { useNavigate } from "react-router-dom";
 
 
 interface Response {
@@ -10,6 +11,8 @@ interface Response {
 }
 
 export default function Login() {
+
+    const nav = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -50,6 +53,8 @@ export default function Login() {
                 } else if (response.token) {
                     console.log("a token");
                     localStorage.setItem("token", response.token)
+                    nav("/");
+                    
                 } else if (response.error) {
                     console.log("error message");
                     setError(response.error);
