@@ -1,12 +1,20 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../style/Topbar.scss';
 import NavBar from './Navbar';
 import { useLocation, useNavigate } from 'react-router-dom';
+import config from '../config.json';
+
+interface Account {
+    uid: bigint;
+    username: string;
+    email: string;
+}
 
 export default function TopBar() {
     const nav = useNavigate();
     const [elapse, setElapse] = useState(false);
+    const [account, setAccount] = useState<Account | undefined>(undefined);
     const location = useLocation();
 
     const pageName = location.pathname.split('/').filter(Boolean).pop() || 'home';
@@ -14,6 +22,36 @@ export default function TopBar() {
     const handleButtonClick = () => {
         setElapse(prevElapse => !prevElapse);
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token !== null) {
+            const fetchAccountInfo = async () => {
+                try {
+                    const result = await fetch(config.api_url + "/api/me", {
+                        method: "GET",
+                        headers: {
+                            "Authorization": token
+                        }
+                    });
+
+                    if (!result.status) {
+                        localStorage.removeItem("token");
+                        throw new Error("response failed");
+                    }
+
+                    const response: Account = await result.json();
+                    console.log(response);
+                    setAccount(response);
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+
+            fetchAccountInfo();
+        }
+    }, []);
 
     return (
     <div>
@@ -39,11 +77,20 @@ export default function TopBar() {
                     <h3>{pageName}</h3>
                 </div>
             </div>
+            {account ? (
+            <div className='acc-top-bar-container'>
+                <div className='acc-top-bar-container'>
+                    <h4>{account.username}</h4>
+                </div>
+            </div>
+            ) : (
             <div className='user-login-container'>
                 <div className='user-login-container-inner'>
                     <button className='user-login-btn' onClick={() => nav('/register_or_login')}>Login</button>
                 </div>
             </div>
+            )}
+            
             
         </div>
     </div>
