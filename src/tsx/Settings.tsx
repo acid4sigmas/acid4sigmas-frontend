@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import TopBar from "./Topbar";
 import "../style/Settings.scss";
 import { useEffect, useState } from "react";
+
+import { BrowserRouter as Router, Routes, Route }from 'react-router-dom';
+import SettingsThemes from "./Settings/Themes";
+import VerifyEmail from "./Settings/VerifyEmail";
+
+export function RedirectSettingsRoute() {
+  return <Navigate to="/settings/themes" />;
+}
 
 export default function Settings() {
 
@@ -20,30 +28,29 @@ export default function Settings() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    window.location.replace("/");
   }
 
   return (
     <div>
       <TopBar />
-      <div className="container">
-        <div className="settings-container">
-          <div className="settings-container-inner">
-            <div className="settings-navlink-container">
-              <div className="settings-navlink">
-                <Link to="/settings/themes">Themes</Link>
-                {loggedIn ? (
+      <div className="settings-navlink-container">
+        <div className="settings-navlink">
+          <nav>
+            <Link to="/settings/themes">Themes</Link>
+            <br/>
+            <br />
+            <Link to="/settings/verify_email">Verify Email</Link>
+            <br />
+            <br />
+            {loggedIn ? (
                 <div className="logout-btn">
                   <button onClick={handleLogout}>Logout</button>
                 </div>
-                ) : (
+              ) : (
                 <div></div>
-                )}
-              </div>
-            </div>
-            <div className="settings-content">
-              
-            </div>
-          </div>
+              )}
+          </nav>
         </div>
       </div>
     </div>

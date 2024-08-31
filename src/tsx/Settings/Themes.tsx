@@ -12,6 +12,7 @@ import greenTheme from "../../style/themes/green.json";
 import oledTheme from "../../style/themes/oled.json";
 
 import { Style } from "../../Router";
+import Settings from "../Settings";
 
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
@@ -48,11 +49,7 @@ export default function SettingsThemes() {
       <div className="container">
         <div className="settings-container">
           <div className="settings-container-inner">
-            <div className="settings-navlink-container">
-              <div className="settings-navlink">
-                <Link to="/settings/themes">Themes</Link>
-              </div>
-            </div>
+            <Settings />
             <div className="settings-content">
               <div className="settings-themes-container">
                 <div className="settings-themes-container-inner">

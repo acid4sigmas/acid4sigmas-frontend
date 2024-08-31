@@ -1,14 +1,15 @@
-import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import App from "./tsx/App";
 import About from "./tsx/About";
 import MySaviour from "./tsx/MySaviour";
-import Settings from "./tsx/Settings";
+import Settings, { RedirectSettingsRoute } from "./tsx/Settings";
 import SettingsThemes from "./tsx/Settings/Themes";
 import { useEffect } from "react";
 import theme from "./style/themes/blue.json";
 import LoginRegister from "./tsx/LoginRegister";
 import Login from "./tsx/Auth/Login";
 import Register from "./tsx/Auth/Register";
+import VerifyEmail from "./tsx/Settings/VerifyEmail";
 
 export interface Style {
   primary_color_text: string;
@@ -110,8 +111,9 @@ export default function DomRouter() {
         <Route path="/" element={<App />} />
         <Route path="/about" element={<About />} />
         <Route path="/mysaviour" element={<MySaviour />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/settings" element={<RedirectSettingsRoute />} />
         <Route path="/settings/themes" element={<SettingsThemes />} />
+        <Route path="/settings/verify_email" element={<VerifyEmail />} />
         <Route path="/register_or_login" element={<LoginRegister />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
