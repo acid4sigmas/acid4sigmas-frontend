@@ -19,7 +19,7 @@ export default function LoginRegister() {
                     </div>
                     <span>or</span>
                     <div className="login-or-register-btn-div">
-                        <button>Register</button>
+                        <button onClick={() => nav("/auth/register")}>Register</button>
                     </div>
                 </div>
                 <br/>

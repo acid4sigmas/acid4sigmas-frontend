@@ -104,6 +104,9 @@ export default function Login() {
                         <br/>
                         <input type="submit" name="login" value="login"></input>
                     </form>
+                    <p>If you havent already, you may need to verify your email.</p>
+                    <p>navigate to Open Navbar → Settigns → Verify Email</p>
+                    <p>If you do not verify your email you cannot use the api services.</p>
                     <div className="error-msg-container">
                         <h4 className="error-msg-container-h4">{error}</h4>
                     </div>

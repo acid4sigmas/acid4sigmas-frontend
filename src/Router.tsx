@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import theme from "./style/themes/blue.json";
 import LoginRegister from "./tsx/LoginRegister";
 import Login from "./tsx/Auth/Login";
+import Register from "./tsx/Auth/Register";
 
 export interface Style {
   primary_color_text: string;
@@ -113,6 +114,7 @@ export default function DomRouter() {
         <Route path="/settings/themes" element={<SettingsThemes />} />
         <Route path="/register_or_login" element={<LoginRegister />} />
         <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/register" element={<Register />} />
       </Routes>
     </Router>
   );
