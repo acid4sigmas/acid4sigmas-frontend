@@ -70,13 +70,13 @@ export default function TopBar() {
             </div>
             <div className="current-page-header-container">
                 <div className='current-page-header-container-inner'>
-                    <h3>{pageName}</h3>
+                    <h3 className='font-bold'>{pageName}</h3>
                 </div>
             </div>
             {account ? (
             <div className='acc-top-bar-container'>
                 <div className='acc-top-bar-container'>
-                    <h4>{account.username}</h4>
+                    <h4 className='font-bold'>{account.username}</h4>
                 </div>
             </div>
             ) : (

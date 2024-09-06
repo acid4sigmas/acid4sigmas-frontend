@@ -53,18 +53,17 @@ export default function SettingsThemes() {
             <div className="settings-content">
               <div className="settings-content-container">
                 <div className="settings-content-container-inner">
-                  <h2>Themes</h2>
+                  <h2 className="text-4xl font-semibold mb-3">Themes</h2>
                   <hr />
                   <div>
                     <div className="transparency-effects-container">
-                      <div className="transparency-effects-container-text">
-                        <p>Transparency effects</p>
-                        <p className="small-p">
+                      <div className="mt-2">
+                        <p className="text-2xl">Transparency effects</p>
+                        <p className="mb-2">
                           <small>(requires refresh)</small>
                         </p>
                       </div>
-                      <div className="transparency-effects-toggle-container">
-                        <p className="transparency-effects-toggle-text">On</p>
+                      <div className="mt-3">
                         <label className="transparency-effects-toggle-switch">
                           <input
                             type="checkbox"
@@ -86,7 +85,8 @@ export default function SettingsThemes() {
                       </summary>
                       <SelectableColorBox />
                     </details>
-                    <hr />
+                    <br />
+                    <hr/>
                   </div>
                 </div>
               </div>

@@ -122,7 +122,7 @@ export default function VerifyEmail() {
                     <div className="settings-content">
                         <div className="settings-content-container">
                             <div className="settings-content-container-inner">
-                                <h2>Verify Email</h2>
+                                <h2 className="texta">Verify Email</h2>
                                 <hr/>
                                 <div>
                                     {account?.email ? 
@@ -158,9 +158,7 @@ export default function VerifyEmail() {
                                         <label>Enter your verification code</label>
                                         <br/>
                                         <br/>
-                                        <div className="verify-code-field">
-                                             
-                                        </div>
+                                        <h1 className="text-3xl font-bold underline">d</h1>
                                     </form>
                                 </div>
                             </div>

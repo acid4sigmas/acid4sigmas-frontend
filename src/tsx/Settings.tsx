@@ -40,12 +40,14 @@ export default function Settings() {
             <Link to="/settings/themes">Themes</Link>
             <br/>
             <br />
-            <Link to="/settings/verify_email">Verify Email</Link>
-            <br />
-            <br />
             {loggedIn ? (
+                <div>
+                <Link to="/settings/verify_email">Verify Email</Link>
+                <br />
+                <br />
                 <div className="logout-btn">
                   <button onClick={handleLogout}>Logout</button>
+                </div>
                 </div>
               ) : (
                 <div></div>
