@@ -10,24 +10,9 @@ import LoginRegister from "./tsx/LoginRegister";
 import Login from "./tsx/Auth/Login";
 import Register from "./tsx/Auth/Register";
 import VerifyEmail from "./tsx/Settings/VerifyEmail";
+import { Style } from "./types";
 
-export interface Style {
-  primary_color_text: string;
-  primary_color: string;
-  secondary_color: string;
-  background_color_primary: string;
-  background_color_secondary: string;
-  background_color_tertiary: string;
 
-  primary_grey: string;
-  secondary_grey: string;
-
-  font_size: string;
-
-  transparency: boolean;
-  transparency_value: number;
-  transparency_blur: string;
-}
 
 export function applyCssTheme(jsonTheme: Style) {
   document.documentElement.style.setProperty(

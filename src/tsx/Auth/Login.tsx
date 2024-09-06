@@ -3,12 +3,7 @@ import TopBar from "../Topbar";
 import config from '../../config.json';
 import { useNavigate } from "react-router-dom";
 
-
-interface Response {
-    error?: string;
-    message?: string;
-    token?: string;
-}
+import { Response } from "../../types";
 
 export default function Login() {
 

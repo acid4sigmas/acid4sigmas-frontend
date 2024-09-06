@@ -4,12 +4,8 @@ import '../style/Topbar.scss';
 import NavBar from './Navbar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../config.json';
+import { Account } from '../types';
 
-interface Account {
-    uid: bigint;
-    username: string;
-    email: string;
-}
 
 export default function TopBar() {
     const nav = useNavigate();

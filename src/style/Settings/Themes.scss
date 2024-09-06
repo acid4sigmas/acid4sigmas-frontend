@@ -1,15 +1,6 @@
 @import "../variables";
 
-.settings-themes-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.settings-themes-container-inner {
-  width: 97%;
-  height: 100%;
-}
 
 .transparency-effects-container {
   display: flex;
@@ -118,8 +109,8 @@ input:checked ~ .transparency-effects-toggle-slider {
 
 .accent-color-container {
   display: flex;
-  gap: 10px; /* Optional: Add spacing between boxes */
-  justify-content: center; /* Center the boxes horizontally */
-  align-items: center; /* Center the boxes vertically */
-  flex-wrap: wrap; /* Optional: Wrap boxes to the next line if there's not enough space */
+  gap: 10px; 
+  justify-content: center;
+  align-items: center; 
+  flex-wrap: wrap; 
 }

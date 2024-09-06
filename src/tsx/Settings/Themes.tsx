@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import TopBar from "../Topbar";
 import "../../style/Settings/Themes.scss";
 import { useEffect, useState } from "react";
@@ -11,8 +10,9 @@ import purpleTheme from "../../style/themes/purple.json";
 import greenTheme from "../../style/themes/green.json";
 import oledTheme from "../../style/themes/oled.json";
 
-import { Style } from "../../Router";
+
 import Settings from "../Settings";
+import { Style } from "../../types";
 
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
@@ -51,8 +51,8 @@ export default function SettingsThemes() {
           <div className="settings-container-inner">
             <Settings />
             <div className="settings-content">
-              <div className="settings-themes-container">
-                <div className="settings-themes-container-inner">
+              <div className="settings-content-container">
+                <div className="settings-content-container-inner">
                   <h2>Themes</h2>
                   <hr />
                   <div>
