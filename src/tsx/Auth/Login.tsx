@@ -4,6 +4,8 @@ import config from '../../config.json';
 import { useNavigate } from "react-router-dom";
 
 import { Response } from "../../types";
+import { CenteredContainer, Container } from "../../components/Container";
+import Input from "../../components/Input";
 
 export default function Login() {
 
@@ -70,15 +72,13 @@ export default function Login() {
     return (
     <div>
         <TopBar />
-        <div className="container">
-            <div className="centered-container">
+        <Container>
+            <CenteredContainer>
                 <div className="login-form">
                     <form onSubmit={handleSubmit}>
-                        <h1>Login</h1>
                         <label>username or email</label>
                         <br/>
-                        <input
-                            type="text"
+                        <Input 
                             name="username"
                             value={username}
                             onChange={handleInputChange}
@@ -88,12 +88,11 @@ export default function Login() {
                         <br/>
                         <label>password</label>
                         <br/>
-                        <input 
-                            type="password"
+                        <Input 
                             name="password"
                             value={password}
                             onChange={handleInputChange}
-                            required
+                            required password
                         />
                         <br/>
                         <br/>
@@ -106,8 +105,8 @@ export default function Login() {
                         <h4 className="error-msg-container-h4">{error}</h4>
                     </div>
                 </div>
-            </div>
-        </div>
+            </CenteredContainer>
+        </Container>
     </div>
     )
 }
