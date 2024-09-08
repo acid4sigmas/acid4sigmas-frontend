@@ -51,7 +51,7 @@ export default function TopBar() {
 
     return (
     <div>
-        <div className='navbar-container'>
+        <div className='relative z-10 top-0'>
             {elapse ? 
                 (
                     <div>
@@ -64,27 +64,30 @@ export default function TopBar() {
                 )
             }
         </div>
-        <div className="topbar">
-            <div className="open-navbar-container">
-                <button className='open-navbar-btn' onClick={handleButtonClick}>{elapse ? 'Close Navbar' : 'Open Navbar'}</button>
+        <div className={
+            [
+                "fixed flex top-0 items-center overflow-hidden",
+                "w-full h-[55px]",
+                "backdrop-blur",
+                "z-10",
+                "border-b border-[rgba(255,255,255,calc(var(--transparency)+0.25))]",
+                "topbar"
+            ].join(" ")}>
+            <div className="fixed">
+                <button className='border-none rounded-md p-2 ml-2 bg-secondary text-primary-text-color' onClick={handleButtonClick}>{elapse ? 'Close Navbar' : 'Open Navbar'}</button>
             </div>
-            <div className="current-page-header-container">
-                <div className='current-page-header-container-inner'>
-                    <h3 className='font-bold'>{pageName}</h3>
-                </div>
+            <div className="flex justify-center items-center w-full">
+                <h3 className='font-bold'>{pageName}</h3>
             </div>
             {account ? (
-            <div className='acc-top-bar-container'>
-                <div className='acc-top-bar-container'>
-                    <h4 className='font-bold'>{account.username}</h4>
-                </div>
+            <div className='flex items-center justify-center pr-3 pl-3'>
+                <h4>{account.username}</h4>
             </div>
             ) : (
-            <div className='user-login-container'>
-                <div className='user-login-container-inner'>
-                    <button className='user-login-btn' onClick={() => nav('/register_or_login')}>Login</button>
-                </div>
+            <div className='flex items-center justify-center pr-3 pl-3'>
+                <button className='border-none rounded-md p-2 ml-2 bg-secondary text-primary-text-color' onClick={() => nav('/register_or_login')}>Login</button>
             </div>
+ 
             )}
             
             

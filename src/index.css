@@ -98,3 +98,15 @@ span {
   z-index: -1;
 }
 
+.topbar::before {
+  content: ''; 
+  position: absolute; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background-color-secondary);
+  opacity: var(--transparency); 
+  z-index: -1; 
+
+}

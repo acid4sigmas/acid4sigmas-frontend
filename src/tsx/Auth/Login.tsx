@@ -102,7 +102,7 @@ export default function Login() {
                     <p>navigate to Open Navbar → Settigns → Verify Email</p>
                     <p>If you do not verify your email you cannot use the api services.</p>
                     <div className="error-msg-container">
-                        <h4 className="error-msg-container-h4">{error}</h4>
+                        <h4 className="text-red-600">{error}</h4>
                     </div>
                 </div>
             </CenteredContainer>
