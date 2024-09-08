@@ -27,23 +27,12 @@ module.exports = {
         DEFAULT: 'var(--transparency)',
       },
     },
+    screens: {
+      "sm": {'max': '620px'},
+      "smh": {'max': '620px'}
+    }
   },
-  plugins: [
-    function({ addComponents }) {
-      addComponents({
-        '.navbar::before': {
-          content: '""',
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          right: '0',
-          bottom: '0',
-          backgroundColor: 'var(--background-color-secondary)',
-          opacity: 'var(--transparency)',
-          zIndex: '-1',
-        },
-      });
-    },
-  ],
+  plugins: []
+    
 }
 

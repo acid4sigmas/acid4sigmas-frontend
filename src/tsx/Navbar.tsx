@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { CenteredContainer } from "../components/Container";
-import NavbarLink from "../components/NavbarLink";
+import NavbarLink from "../components/NavLink";
 
 
 export default function NavBar() {

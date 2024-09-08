@@ -34,7 +34,17 @@ export default function Settings() {
   return (
     <div>
       <TopBar />
-      <div className="settings-navlink-container">
+      <div className={
+        [
+          "h-full w-fit",
+          "bg-background-secondary",
+          "border-r-2 border-l-2 border-t-2 border-b-2",
+          "border-r-grey-100 border-l-primary border-t-primary border-b-primary",
+          "pr-[3.5vh] pl-[3.5vh]",
+          "rounded-tl-lg rounded-bl-lg",
+          "drop-shadow-lg"
+        ].join(' ')
+      }>
         <div className="settings-navlink">
           <nav>
             <Link to="/settings/themes">Themes</Link>

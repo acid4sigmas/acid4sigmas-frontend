@@ -13,7 +13,7 @@ import oledTheme from "../../style/themes/oled.json";
 
 import Settings from "../Settings";
 import { Style } from "../../types";
-import { Container } from "../../components/Container";
+import { Container, SettingsContainer, SettingsContentContainer } from "../../components/Container";
 
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
@@ -48,13 +48,11 @@ export default function SettingsThemes() {
     <div>
       <TopBar />
       <Container>
-        <div className="settings-container">
-          <div className="settings-container-inner">
+        <SettingsContainer>
             <Settings />
-            <div className="settings-content">
-              <div className="settings-content-container">
+            <SettingsContentContainer>
                 <div className="settings-content-container-inner">
-                  <h2 className="text-4xl font-semibold mb-3">Themes</h2>
+                  <h2>Themes</h2>
                   <hr />
                   <div>
                     <div className="transparency-effects-container">
@@ -90,10 +88,9 @@ export default function SettingsThemes() {
                     <hr/>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            
+          </SettingsContentContainer>
+        </SettingsContainer>
       </Container>
     </div>
   );
