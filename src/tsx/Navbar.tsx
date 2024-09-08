@@ -2,13 +2,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { CenteredContainer } from "../components/Container";
 import NavbarLink from "../components/NavLink";
+import { useEffect, useState } from "react";
 
 
 export default function NavBar() {
     const nav = useNavigate();
+   
+
 
     return (
-        <div className="w-[250px] fixed h-[100vh] backdrop-blur border-r border-[rgba(255,255,255,calc(var(--transparency)+0.25))] z-10 overflow-hidden ">
+        <div
+            className="w-[250px] fixed h-[100vh] backdrop-blur border-r border-[rgba(255,255,255,calc(var(--transparency)+0.25))] z-10 overflow-hidden navbar"
+        >
             <CenteredContainer>
                 <NavbarLink to="/" label="Home" />
                 <NavbarLink to="/about" label="About" />
