@@ -1,29 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
-import '../style/Navbar.scss'
+
+import { CenteredContainer } from "../components/Container";
+import NavbarLink from "../components/NavbarLink";
 
 
 export default function NavBar() {
     const nav = useNavigate();
 
     return (
-        <div className="navbar">
-            <div className="navbar-inner">
-                <div className="navbar-link" onClick={() => nav("/")}>
-                    <div className="navbar-link-inner"><Link to="/">Home</Link></div>
-                </div>
-                <br/>
-                <div className="navbar-link" onClick={() => nav("/about")}>
-                    <div className="navbar-link-inner"><Link to="/about">About</Link></div>
-                </div>
-                <br/>
-                <div className="navbar-link" onClick={() => nav("/mysaviour")}>
-                    <div className="navbar-link-inner"><Link to="/mysaviour">My Saviour</Link></div>
-                </div>
-                <br/>
-                <div className="navbar-link" onClick={() => nav("/settings")}>
-                    <div className="navbar-link-inner"><Link to="/settings">Settings</Link></div>
-                </div>
-            </div>
+        <div className="w-[250px] fixed h-[100vh] backdrop-blur border-r border-[rgba(255,255,255,calc(var(--transparency)+0.25))] z-10 overflow-hidden ">
+            <CenteredContainer>
+                <NavbarLink to="/" label="Home" />
+                <NavbarLink to="/about" label="About" />
+                <NavbarLink to="/mysaviour" label="My Saviour"/>
+                <NavbarLink to="/settings" label="Settings" />
+            </CenteredContainer>
         </div>
     )
 }

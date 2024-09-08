@@ -1,3 +1,4 @@
+import { Container } from "../components/Container"
 import TopBar from "./Topbar"
 
 
@@ -5,9 +6,9 @@ export default function About() {
     return (
     <div>
         <TopBar />
-        <div className="container">
+        <Container>
             <h1>Hssssssssssssssssssss</h1>
-        </div>
+        </Container>
     </div>
     )
 }

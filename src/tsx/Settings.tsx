@@ -1,6 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import TopBar from "./Topbar";
-import "../style/Settings.scss";
+import "../style/Settings.css";
 import { useEffect, useState } from "react";
 
 import { BrowserRouter as Router, Routes, Route }from 'react-router-dom';

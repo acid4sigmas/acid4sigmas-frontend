@@ -1,0 +1,44 @@
+body {
+    background-color: var(--background-color-primary);
+    height: 100vh;
+    margin: 0; 
+}
+
+
+h4 {
+    color: var(--primary-text-color);
+}
+h3 {
+    color: var(--primary-text-color);
+}
+h2 {
+    color: var(--primary-text-color);
+}
+h1 {
+    color: var(--primary-text-color);
+}
+p {
+    color: var(--primary-text-color);
+}
+label {
+    color: var(--primary-text-color);
+}
+
+details {
+    color: var(--primary-text-color);
+}
+
+span {
+    color: var(--primary-text-color);
+}
+.container {
+    margin-top: 56px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.centered-container {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}

@@ -1,31 +1,6 @@
 @import 'variables';
 
-.navbar {
-    width: 250px;
-    position: fixed;
-    height: 100vh;
-    backdrop-filter: blur(var(--transparency-blur));
-    border-right: 1px solid rgba(255, 255, 255, calc(var(--transparency) + 0.25));
-    z-index: 1;
-    overflow: hidden; 
-}
 
-.navbar::before {
-    content: ''; 
-    position: absolute; 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--background-color-secondary);
-    opacity: var(--transparency); 
-    z-index: -1; 
-}
-
-.navbar-inner {
-    text-align: center;
-
-}
 
 .navbar-link {
     margin-top: 0px;

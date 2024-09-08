@@ -13,6 +13,7 @@ import oledTheme from "../../style/themes/oled.json";
 
 import Settings from "../Settings";
 import { Style } from "../../types";
+import { Container } from "../../components/Container";
 
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
@@ -46,7 +47,7 @@ export default function SettingsThemes() {
   return (
     <div>
       <TopBar />
-      <div className="container">
+      <Container>
         <div className="settings-container">
           <div className="settings-container-inner">
             <Settings />
@@ -93,7 +94,7 @@ export default function SettingsThemes() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

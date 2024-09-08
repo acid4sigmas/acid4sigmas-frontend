@@ -1,7 +1,8 @@
 import TopBar from "./Topbar";
+import {Container, CenteredContainer} from "../components/Container";
 
-import '../style/LoginRegister.scss'
 import { useNavigate } from "react-router-dom";
+
 
 export default function LoginRegister() {
     const nav = useNavigate();
@@ -9,23 +10,34 @@ export default function LoginRegister() {
     return (
     <div>
         <TopBar />
-        <div className="container">
-            <div className="centered-container">
+        <Container>
+            <CenteredContainer>
                 <br/>
                 <h1>Your Acid4Sigmas Account</h1>
-                <div className="login-or-register-container">
-                    <div className="login-or-register-btn-div">
-                        <button className="real-login-btn" onClick={() => nav("/auth/login")}>Login</button>
+                <div>
+                    <div>
+                        <button 
+                            className="p-[2vh_6vh_2vh_6vh] mt-3 bg-secondary border-none rounded-lg shadow-md text-primary-text-color text-md hover:opacity-80"
+                            onClick={() => nav("/auth/login")}
+                        >
+                            Login
+                        </button>
                     </div>
                     <span>or</span>
-                    <div className="login-or-register-btn-div">
-                        <button onClick={() => nav("/auth/register")}>Register</button>
+                    <div>
+                        <button 
+                            className="p-[2vh_6vh_2vh_6vh] mt-3 bg-secondary border-none rounded-lg shadow-md text-primary-text-color text-md hover:opacity-80"
+                            onClick={() => nav("/auth/register")}
+                        >
+                        Register
+                        </button>
                     </div>
                 </div>
                 <br/>
                 <hr />
-                <div className="acc-faq-container">
-                    <div className="acc-faq-container-inner">
+                <br />
+                <div className="flex justify-center align-middle">
+                    <div className="bg-background-secondary w-fit p-10  rounded-lg list-none">
                         <h1>FAQ</h1>
                         <details>
                             <summary>Why would i even sign up?</summary>
@@ -33,9 +45,8 @@ export default function LoginRegister() {
                         </details>
                     </div>
                 </div>
-                
-            </div>
-        </div>
+            </CenteredContainer>
+        </Container>
     </div>
     )
 }

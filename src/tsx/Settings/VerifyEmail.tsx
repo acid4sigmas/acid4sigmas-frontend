@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import config from '../../config.json';
 import { Account } from "../../types";
 import { Response } from "../../types";
+import { Container } from "../../components/Container";
 
 const token = localStorage.getItem("token");
 
@@ -115,14 +116,14 @@ export default function VerifyEmail() {
     return (
     <div>
         <TopBar />
-        <div className="container">
+        <Container>
             <div className="settings-container">
                 <div className="settings-container-inner">
                     <Settings />
                     <div className="settings-content">
                         <div className="settings-content-container">
                             <div className="settings-content-container-inner">
-                                <h2 className="texta">Verify Email</h2>
+                                <h2>Verify Email</h2>
                                 <hr/>
                                 <div>
                                     {account?.email ? 
@@ -167,7 +168,7 @@ export default function VerifyEmail() {
                     </div>
                 </div>
             </div>
-        </div>
+        </Container>
     </div>
     )
 }

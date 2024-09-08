@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -50,3 +51,39 @@ h3 {
 p {
   @apply text-base text-gray-600;
 }
+
+body {
+  background-color: var(--background-color-primary);
+  height: 100vh;
+  margin: 0; 
+}
+
+
+h4 {
+  color: var(--primary-text-color);
+}
+h3 {
+  color: var(--primary-text-color);
+}
+h2 {
+  color: var(--primary-text-color);
+}
+h1 {
+  color: var(--primary-text-color);
+}
+p {
+  color: var(--primary-text-color);
+}
+label {
+  color: var(--primary-text-color);
+}
+
+details {
+  color: var(--primary-text-color);
+}
+
+span {
+  color: var(--primary-text-color);
+}
+
+
