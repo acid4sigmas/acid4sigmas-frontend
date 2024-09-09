@@ -33,27 +33,8 @@ module.exports = {
     }
   },
   plugins: [
-    function ({ addUtilities }) {
-      const newUtilities = {
-        '.before-element': {
-          position: 'relative',
-        },
-        '.before-element::before': {
-          content: "''", 
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          right: '0',
-          bottom: '0',
-          backgroundColor: 'var(--background-color-secondary)', 
-          opacity: 'var(--transparency)',
-          zIndex: '-1',
-        },
-      }
-
-      addUtilities(newUtilities, ['responsive', 'hover'])
-    },
-  ],
+   
+  ]
     
 }
 
