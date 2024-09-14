@@ -169,6 +169,7 @@ export default function VerifyEmail() {
                                             callback={(o) => setCode(o)}
                                             name="code"
                                             value={code}
+                                            regex={/^[0-9]$/}
                                         />
                                     </form>
                                 </div>

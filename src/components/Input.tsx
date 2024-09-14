@@ -44,13 +44,15 @@ export namespace Input {
     value?: string;
     callback: (code: string) => void;
     required?: boolean;
+    regex?: RegExp;
   }
 
   export const Code: React.FC<CodeProps> = ({
     name = '',
     value = '',
     callback,
-    required = false
+    required = false,
+    regex = /^[A-Z0-9]$/
   }) => {
     const [code, setCode] = useState('');
 
@@ -80,7 +82,6 @@ export namespace Input {
 
       if (code.length === 6) {
         if (typeof callback === 'function') callback(code);
-        resetCode();
       }
       
     }, [code]);
@@ -92,27 +93,17 @@ export namespace Input {
 
       const newCode = [...code];
 
-      if (/^[a-z]+$/.test(input.value)) {
-        const uc = input.value.toUpperCase();
-        newCode[index] = uc;
-        if (inputRefs[index].current) {
-          inputRefs[index].current.value = uc;
+      if (regex.test(input.value)) {
+        const value = input.value.toUpperCase();
+        newCode[index] = value;
+        setCode(newCode.join(''));
+
+        if (nextInput) {
+          nextInput.current?.focus();
         }
       } else {
-        newCode[index] = input.value;
+        input.value = '';
       }
-      setCode(newCode.join(''));
-
-      input.select();
-
-      if (input.value === '') {
-        if (previousInput) {
-          previousInput.current?.focus();
-        }
-      } else if (nextInput) {
-        nextInput.current?.select();
-      }
-
     }
 
     function handleFocus(e: any) {
@@ -151,15 +142,6 @@ export namespace Input {
       }
     }
 
-    const ClearButton = () => {
-      return (
-        <button
-          onClick={resetCode}
-          className="text-2xl"
-        >reset</button>
-      )
-    }
-
     return (
       <div className="flex gap-2 relative">
         {[0, 1, 2, 3, 4, 5, ].map((index: number) => (
@@ -180,6 +162,4 @@ export namespace Input {
     )
 
   }
-
-
-}
+} 
