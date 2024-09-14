@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import TopBar from "../Topbar";
 import Settings from "../Settings";
-import '../../style/Settings/VerifyEmail.scss';
 import { useEffect, useRef, useState } from "react";
 import config from '../../config.json';
 import { Account } from "../../types";
 import { Response } from "../../types";
-import { Container } from "../../components/Container";
+import { Container, SettingsContainer, SettingsContentContainer } from "../../components/Container";
 import { Input } from "../../components/Input";
+import { Buttons } from "../../components/Buttons";
 
 const token = localStorage.getItem("token");
 
@@ -17,44 +17,8 @@ export default function VerifyEmail() {
     const [message, setMessage] = useState("");
     const nav = useNavigate();
     const [code, setCode] = useState("");
-
-    const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-        const value = e.target.value;
-        if (/^[0-9]$/.test(value)) {
-            let newCode = [...code];
-            newCode[index] = value;
-           
-            
-            if (index < 5) {
-                inputsRef.current[index + 1]?.focus()
-            }
-        }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-        if (e.key === "Backspace") {
-            if (code[index] === "") {
-                if (index > 0) {
-                    inputsRef.current[index - 1]?.focus();
-                }
-            } else {
-                let newCode = [...code];
-                newCode[index] = "";
-              
-            }
-        }
-    };
-
-    const handleSubmit = () => {
-        const codeValue = code
-        console.log("Code entered:", codeValue);
-    };
     
     useEffect(() => {
-        
-
         if (token !== null) {
             const fetchAccountInfo = async () => {
                 try {
@@ -119,67 +83,68 @@ export default function VerifyEmail() {
     }, [code])
 
     return (
-    <div>
-        <TopBar />
-        <Container>
-            <div className="settings-container">
-                <div className="settings-container-inner">
+        <div>
+            <TopBar />
+            <Container>
+                <SettingsContainer>
                     <Settings />
-                    <div className="settings-content">
-                        <div className="settings-content-container">
-                            <div className="settings-content-container-inner">
-                                <h2>Verify Email</h2>
-                                <hr/>
+                    <SettingsContentContainer>
+                        <div className="settings-content-container-inner">
+                            <h2>Verify Email</h2>
+                            <hr/>
+                            <div>
+                                {account?.email ? 
                                 <div>
-                                    {account?.email ? 
-                                    <div>
-                                        <p>Your email is not verified</p>
-                                        <p>lets change that!</p>
-                                        <hr/> 
-                                        <div className="verify-email-container">
-                                            <h3>Send verification email</h3>
-                                            <p>click the button below to send an email with a verification code</p>
-                                            <div className="send-verification-email-container">
-                                                <button onClick={sendEmail}>Send Email</button>
-                                            </div>
+                                    <p>Your email is not verified</p>
+                                    <p>lets change that!</p>
+                                    <hr/> 
+                                    <div className="verify-email-container">
+                                        <h3>Send verification email</h3>
+                                        <p>click the button below to send an email with a verification code</p>
+                                        <div className="send-verification-email-container">
+                                            <Buttons.Default label="Send Email" onClick={(_) => console.log("hello world")}/>
                                         </div>
-                                    </div> 
-                                    : 
-                                    <div>
-                                        <p>Your email is verified!</p>
-                                        <p>No need to attempt to verify it again :)</p>
-                                    </div>
-                                    }
-                                </div>
-                                <div>
-                                    {error}
-                                </div>
-                                <div>
-                                    {message}
-                                </div>
-                                <hr/>
-                                <div>
-                                    <h3>Verification Code</h3>
-                                    <form>
-                                        <label>Enter your verification code</label>
                                         <br/>
+                                        <hr/>
                                         <br/>
-                                        <h1 className="text-3xl font-bold underline">d</h1>
-                                        <Input.Code 
-                                            callback={(o) => setCode(o)}
-                                            name="code"
-                                            value={code}
-                                            regex={/^[0-9]$/}
-                                        />
-                                    </form>
-                                </div>
-                            </div>
+                                        <div>
+                                            <h3>Verification Code</h3>
+                                            <form>
+                                                <label>Enter your verification code</label>
+                                                <br/>
+                                                <br/>
+                                                <Input.Code 
+                                                    callback={(o) => setCode(o)}
+                                                    name="code"
+                                                    value={code}
+                                                    regex={/^[0-9]$/}
+                                                />
 
+                                                <br/>
+                                                <Input.SubmitBtn label="verify"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> 
+                                : 
+                                <div>
+                                    <p>Your email is verified!</p>
+                                    <p>No need to attempt to verify it again :)</p>
+                                </div>
+                                }
+                            </div>
+                            <div>
+                                {error}
+                            </div>
+                            <div>
+                                {message}
+                            </div>
+                            <hr/>
+                            
                         </div>
-                    </div>
-                </div>
-            </div>
-        </Container>
-    </div>
+                    </SettingsContentContainer>
+                </SettingsContainer>
+            </Container>
+        </div>
     )
 }

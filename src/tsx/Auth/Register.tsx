@@ -122,7 +122,7 @@ export default function Register() {
                         />
                         <br/>
                         <br />
-                        <input type="submit" name="login" value="register"></input>
+                        <Input.SubmitBtn label="Register" />
 
                     </form>
                     <p>If you havent already, you may need to verify your email.</p>

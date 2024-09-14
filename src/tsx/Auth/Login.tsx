@@ -96,7 +96,7 @@ export default function Login() {
                         />
                         <br/>
                         <br/>
-                        <input type="submit" name="login" value="login"></input>
+                        <Input.SubmitBtn label="login "/> 
                     </form>
                     <p>If you havent already, you may need to verify your email.</p>
                     <p>navigate to Open Navbar → Settigns → Verify Email</p>

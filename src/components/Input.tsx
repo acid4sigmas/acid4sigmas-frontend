@@ -160,6 +160,31 @@ export namespace Input {
         ))} 
       </div>
     )
+  }
 
+  interface SubmitBtnProps {
+    label: string;
+  }
+
+  export const SubmitBtn: React.FC<SubmitBtnProps> = ({label = ""}) => {
+    return (
+    <div>
+      <button 
+        type='submit'
+        className={
+          [
+            "bg-secondary",
+            "text-primary-text-color",
+            "pb-2 pt-2 pr-5 pl-5",
+            "rounded-lg",
+            "drop-shadow-lg",
+            "hover:opacity-75"
+          ]
+          .join(" ")
+        }
+      >{label}
+      </button>
+    </div>
+    )
   }
 } 
