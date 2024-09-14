@@ -3,6 +3,8 @@ import TopBar from "../Topbar";
 import config from '../../config.json';
 import { useNavigate } from "react-router-dom";
 import { Response } from "../../types";
+import { CenteredContainer, Container } from "../../components/Container";
+import { Input } from "../../components/Input";
 
 export default function Register() {
     const nav = useNavigate();
@@ -74,15 +76,13 @@ export default function Register() {
     return (
     <div>
         <TopBar />
-        <div className="container">
-            <div className="centered-container">
+        <Container>
+            <CenteredContainer>
                 <div className="register-form">
                     <form onSubmit={handleSubmit}>
-                        <h1>Register</h1>
                         <label>username</label>
                         <br />
-                        <input
-                            type="text"
+                        <Input.Text
                             name="username"
                             value={username}
                             onChange={handleInputChange}
@@ -92,8 +92,7 @@ export default function Register() {
                         <br />
                         <label>email</label>
                         <br />
-                        <input
-                            type="text"
+                        <Input.Text
                             name="email"
                             value={email}
                             onChange={handleInputChange}
@@ -103,23 +102,23 @@ export default function Register() {
                         <br />
                         <label>password</label>
                         <br />
-                        <input 
-                            type="password"
+                        <Input.Text
                             name="password"
                             value={password}
                             onChange={handleInputChange}
                             required
+                            password
                         />
                         <br />
                         <br />
                         <label>confirm password</label>
                         <br/>
-                        <input 
-                            type="password"
+                        <Input.Text
                             name="confirm-password"
                             value={confirmPassword}
                             onChange={handleInputChange}
                             required
+                            password
                         />
                         <br/>
                         <br />
@@ -131,8 +130,8 @@ export default function Register() {
                     <p>If you do not verify your email you cannot use the api services.</p>
 
                 </div>
-            </div>
-        </div>
+            </CenteredContainer>
+        </Container>
     </div>
     )
 }

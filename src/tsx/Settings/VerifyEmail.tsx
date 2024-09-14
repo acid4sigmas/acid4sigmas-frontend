@@ -7,6 +7,7 @@ import config from '../../config.json';
 import { Account } from "../../types";
 import { Response } from "../../types";
 import { Container } from "../../components/Container";
+import { Input } from "../../components/Input";
 
 const token = localStorage.getItem("token");
 
@@ -15,7 +16,7 @@ export default function VerifyEmail() {
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
     const nav = useNavigate();
-    const [code, setCode] = useState(new Array(6).fill(""));
+    const [code, setCode] = useState("");
 
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -24,7 +25,7 @@ export default function VerifyEmail() {
         if (/^[0-9]$/.test(value)) {
             let newCode = [...code];
             newCode[index] = value;
-            setCode(newCode);
+           
             
             if (index < 5) {
                 inputsRef.current[index + 1]?.focus()
@@ -41,13 +42,13 @@ export default function VerifyEmail() {
             } else {
                 let newCode = [...code];
                 newCode[index] = "";
-                setCode(newCode);
+              
             }
         }
     };
 
     const handleSubmit = () => {
-        const codeValue = code.join("");
+        const codeValue = code
         console.log("Code entered:", codeValue);
     };
     
@@ -113,6 +114,10 @@ export default function VerifyEmail() {
         }
     }
 
+    useEffect(() => {
+        console.log(code );
+    }, [code])
+
     return (
     <div>
         <TopBar />
@@ -160,6 +165,11 @@ export default function VerifyEmail() {
                                         <br/>
                                         <br/>
                                         <h1 className="text-3xl font-bold underline">d</h1>
+                                        <Input.Code 
+                                            callback={(o) => setCode(o)}
+                                            name="code"
+                                            value={code}
+                                        />
                                     </form>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Response } from "../../types";
 import { CenteredContainer, Container } from "../../components/Container";
-import Input from "../../components/Input";
+import { Input } from "../../components/Input";
 
 export default function Login() {
 
@@ -78,7 +78,7 @@ export default function Login() {
                     <form onSubmit={handleSubmit}>
                         <label>username or email</label>
                         <br/>
-                        <Input 
+                        <Input.Text
                             name="username"
                             value={username}
                             onChange={handleInputChange}
@@ -88,7 +88,7 @@ export default function Login() {
                         <br/>
                         <label>password</label>
                         <br/>
-                        <Input 
+                        <Input.Text
                             name="password"
                             value={password}
                             onChange={handleInputChange}
