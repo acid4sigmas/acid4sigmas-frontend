@@ -169,7 +169,8 @@ export namespace Input {
   export const SubmitBtn: React.FC<SubmitBtnProps> = ({label = ""}) => {
     return (
     <div>
-      <button 
+      <input 
+        value={label}
         type='submit'
         className={
           [
@@ -182,8 +183,8 @@ export namespace Input {
           ]
           .join(" ")
         }
-      >{label}
-      </button>
+      />
+      
     </div>
     )
   }
