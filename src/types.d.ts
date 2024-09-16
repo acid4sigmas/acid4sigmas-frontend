@@ -29,3 +29,7 @@ export interface Response {
     message?: string;
     token?: string;
 }
+
+export interface CloudthemesStatus {
+    enabled: boolean;
+}

@@ -12,7 +12,7 @@ import oledTheme from "../../style/themes/oled.json";
 
 
 import Settings from "../Settings";
-import { Style } from "../../types";
+import { CloudthemesStatus, Style } from "../../types";
 import { Container, SettingsContainer, SettingsContentContainer } from "../../components/Container";
 import { Buttons } from "../../components/Buttons";
 
@@ -48,9 +48,10 @@ export default function SettingsThemes() {
     }
   };
 
-  const handleCloudSync = async () => {
+  const token = localStorage.getItem("token");
 
-    const token = localStorage.getItem("token");
+  const cloudSync = async () => {
+
 
     try {
       if (token !== null) {
@@ -61,10 +62,50 @@ export default function SettingsThemes() {
           }
         });
 
-        const response = await result.json();
+        if (!result.ok) {
+          const response = await result.json();
+          throw new Error(response.error)
+        }
+
+        const response: CloudthemesStatus = await result.json();
         console.log(response);
+        setIsCloudSyncEnabled(response.enabled);
       } else {
         throw new Error("you are not signed in.");
+      }
+    } catch (e) {
+      setError(String(e));
+    }
+  }
+
+  useEffect(() => {
+    cloudSync();
+  }, []);
+
+
+
+  const handleCloudSync = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      if (token !== null) {
+        const result = await fetch(config.api_url + "/api/cloudthemes/status", {
+          method: "POST",
+          headers: {
+            "Authorization": token
+          },
+          body: JSON.stringify({
+            "enabled": e.target.checked
+          })
+        });
+        
+        if (!result.ok) {
+          const response = await result.json();
+          throw new Error(response.error);
+        }
+
+        const response: CloudthemesStatus = await result.json();
+
+        setIsCloudSyncEnabled(response.enabled);
+        
       }
     } catch (e) {
       setError(String(e));
@@ -113,7 +154,7 @@ export default function SettingsThemes() {
                         </p>
                       </div>
                       <div className="content-center">
-                        <Buttons.Toggle checked={false} onChange={(e) =>{}}/>
+                        <Buttons.Toggle checked={isCloudSyncEnabled} onChange={handleCloudSync}/>
                       </div>
                     </div>
                     <br/>

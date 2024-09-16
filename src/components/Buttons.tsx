@@ -33,7 +33,7 @@ export namespace Buttons {
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     }
     
-    export const Toggle: React.FC<ToggleProps> = ({ checked = false, onChange }) => {
+    export const Toggle: React.FC<ToggleProps> = ({ checked, onChange }) => {
         return (
         <div>
             <label className="relative inline-flex items-center cursor-pointer">
