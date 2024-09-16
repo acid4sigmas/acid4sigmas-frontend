@@ -14,11 +14,12 @@ import oledTheme from "../../style/themes/oled.json";
 import Settings from "../Settings";
 import { Style } from "../../types";
 import { Container, SettingsContainer, SettingsContentContainer } from "../../components/Container";
+import { Buttons } from "../../components/Buttons";
 
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
-  const [isTransparencyEnabled, setIsTransparencyEnabled] =
-    useState<boolean>(false);
+  const [isTransparencyEnabled, setIsTransparencyEnabled] = useState<boolean>(false);
+  const [isCloudSyncEnabled, setIsCloudSyncEnabled] = useState<boolean>(false);
 
   useEffect(() => {
     const storage = localStorage.getItem("theme");
@@ -44,6 +45,10 @@ export default function SettingsThemes() {
     }
   };
 
+  const handleCloudSync = () => {
+
+  }
+
   return (
     <div>
       <TopBar />
@@ -55,26 +60,18 @@ export default function SettingsThemes() {
                   <h2>Themes</h2>
                   <hr />
                   <div>
-                    <div className="transparency-effects-container">
-                      <div className="mt-2">
+                    <div className="flex justify-between">
+                      <div className="mt-3 flex gap-1 mb-3">
                         <p className="text-2xl">Transparency effects</p>
-                        <p className="mb-2">
+                        <p className="content-center">
                           <small>(requires refresh)</small>
                         </p>
                       </div>
-                      <div className="mt-3">
-                        <label className="transparency-effects-toggle-switch">
-                          <input
-                            type="checkbox"
-                            checked={isTransparencyEnabled}
-                            onChange={handleToggleTransparency}
-                          />
-                          <div className="transparency-effects-toggle-slider"></div>
-                          <div className="transparency-effects-toggle-slider-card">
-                            <div className="slider-card-face slider-card-front"></div>
-                            <div className="slider-card-face slider-card-back"></div>
-                          </div>
-                        </label>
+                      <div className="content-center mt-1">
+                        <Buttons.Toggle 
+                          checked={isTransparencyEnabled}
+                          onChange={handleToggleTransparency}
+                        />
                       </div>
                     </div>
                     <hr />
@@ -86,6 +83,17 @@ export default function SettingsThemes() {
                     </details>
                     <br />
                     <hr/>
+                    <div className="flex justify-between mt-2">
+                      <div>
+                        <p className="text-2xl">Cloud Sync</p>
+                        <p>
+                          <small>Sync your current selected theme with the acid4sigmas cloud servers</small>
+                        </p>
+                      </div>
+                      <div className="content-center">
+                        <Buttons.Toggle checked={false} onChange={(e) =>{}}/>
+                      </div>
+                    </div>
                   </div>
                 </div>
             
