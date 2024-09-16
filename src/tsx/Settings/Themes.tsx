@@ -16,10 +16,13 @@ import { Style } from "../../types";
 import { Container, SettingsContainer, SettingsContentContainer } from "../../components/Container";
 import { Buttons } from "../../components/Buttons";
 
+import config from '../../config.json';
+
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
   const [isTransparencyEnabled, setIsTransparencyEnabled] = useState<boolean>(false);
   const [isCloudSyncEnabled, setIsCloudSyncEnabled] = useState<boolean>(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const storage = localStorage.getItem("theme");
@@ -45,8 +48,27 @@ export default function SettingsThemes() {
     }
   };
 
-  const handleCloudSync = () => {
+  const handleCloudSync = async () => {
 
+    const token = localStorage.getItem("token");
+
+    try {
+      if (token !== null) {
+        const result = await fetch(config.api_url + "/api/cloudthemes/status", {
+          method: "GET",
+          headers: {
+              "Authorization": token
+          }
+        });
+
+        const response = await result.json();
+        console.log(response);
+      } else {
+        throw new Error("you are not signed in.");
+      }
+    } catch (e) {
+      setError(String(e));
+    }
   }
 
   return (
@@ -94,6 +116,10 @@ export default function SettingsThemes() {
                         <Buttons.Toggle checked={false} onChange={(e) =>{}}/>
                       </div>
                     </div>
+                    <br/>
+                    <hr />
+                    <br />
+                    <p>{error}</p>
                   </div>
                 </div>
             

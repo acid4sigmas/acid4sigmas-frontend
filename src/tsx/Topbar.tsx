@@ -45,7 +45,23 @@ export default function TopBar() {
                 }
             }
 
+            const fetchCloudThemeStatus = async () => {
+                try {
+                    const result = await fetch(config.api_url + "/api/cloudthemes/status", {
+                        method: "GET",
+                        headers: {
+                            "Authorization": token
+                        }
+                    });
+
+                    const response = await result.json();
+                    console.log(response);
+                } catch {}
+            }
+            
+
             fetchAccountInfo();
+            fetchCloudThemeStatus();
         }
     }, []);
 
