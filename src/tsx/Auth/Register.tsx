@@ -58,7 +58,7 @@ export default function Register() {
                         nav("/");
                     } else if (response.error) {
                         console.log("error message");
-                        setError(response.error);
+                        throw new Error(response.error)
                     } else {
                         console.log("unknown message type");
                     }
@@ -128,7 +128,10 @@ export default function Register() {
                     <p>If you havent already, you may need to verify your email.</p>
                     <p>navigate to Open Navbar → Settigns → Verify Email</p>
                     <p>If you do not verify your email you cannot use the api services.</p>
-
+                    <br />
+                    <div>
+                        <p className="text-red-500">{error}</p>
+                    </div>
                 </div>
             </CenteredContainer>
         </Container>
