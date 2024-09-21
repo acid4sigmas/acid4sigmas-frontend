@@ -33,7 +33,6 @@ export default function Settings() {
 
   return (
     <div>
-      <TopBar />
       <div className={
         [
           "h-full w-fit",
