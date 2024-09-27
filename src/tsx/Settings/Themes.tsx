@@ -17,11 +17,13 @@ import { Container, SettingsContainer, SettingsContentContainer } from "../../co
 import { Buttons } from "../../components/Buttons";
 
 import config from '../../config.json';
+import loading_spinner from '../../assets/loading-buffering.gif';
 
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
   const [isTransparencyEnabled, setIsTransparencyEnabled] = useState<boolean>(false);
   const [isCloudSyncEnabled, setIsCloudSyncEnabled] = useState<boolean>(false);
+  const [isCloudSyncEnabledLoading, setIsCloudSyncEnabledLoading] = useState<boolean>(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -51,8 +53,6 @@ export default function SettingsThemes() {
   const token = localStorage.getItem("token");
 
   const cloudSync = async () => {
-
-
     try {
       if (token !== null) {
         const result = await fetch(config.api_url + "/api/cloudthemes/status", {
@@ -82,11 +82,10 @@ export default function SettingsThemes() {
     cloudSync();
   }, []);
 
-
-
   const handleCloudSync = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       if (token !== null) {
+        setIsCloudSyncEnabledLoading(true);
         const result = await fetch(config.api_url + "/api/cloudthemes/status", {
           method: "POST",
           headers: {
@@ -105,10 +104,12 @@ export default function SettingsThemes() {
         const response: CloudthemesStatus = await result.json();
 
         setIsCloudSyncEnabled(response.enabled);
+        setIsCloudSyncEnabledLoading(false);
         
       }
     } catch (e) {
       setError(String(e));
+      setIsCloudSyncEnabledLoading(false);
     }
   }
 
@@ -154,7 +155,18 @@ export default function SettingsThemes() {
                         </p>
                       </div>
                       <div className="content-center">
-                        <Buttons.Toggle checked={isCloudSyncEnabled} onChange={handleCloudSync}/>
+                        <div className="flex gap-2">
+                          {isCloudSyncEnabledLoading ? 
+                            (
+                            <div>
+                              <img className="w-8" src={loading_spinner}></img>
+                            </div>
+                            )
+                            :
+                            (<div></div>)
+                          }
+                          <Buttons.Toggle checked={isCloudSyncEnabled} onChange={handleCloudSync}/>
+                        </div>
                       </div>
                     </div>
                     <br/>

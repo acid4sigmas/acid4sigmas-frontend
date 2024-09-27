@@ -47,10 +47,10 @@ export namespace Buttons {
                 <div className={
                     [
                         // Base styles
-                        "group", "peer", "bg-grey-100", "rounded-full", "duration-300", "w-14", "h-8", 
+                        "group", "peer", "bg-grey-100", "rounded-full", "duration-150", "w-14", "h-8", 
 
                         // Styles for the after pseudo-element
-                        "after:duration-300", "after:bg-grey-200", "after:rounded-full", 
+                        "after:duration-150", "after:bg-grey-200", "after:rounded-full", 
                         "after:absolute", "after:h-6", "after:w-6", "after:top-1", "after:left-1", 
                         "after:flex", "after:justify-center", "after:items-center",
 
