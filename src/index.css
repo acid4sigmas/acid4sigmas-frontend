@@ -48,6 +48,10 @@ h3 {
   @apply text-2xl font-medium mb-2;
 }
 
+h4 {
+  @apply text-xl font-medium mb-1;
+}
+
 p {
   @apply text-base text-gray-600;
 }
