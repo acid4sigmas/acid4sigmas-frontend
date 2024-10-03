@@ -10,20 +10,47 @@ import purpleTheme from "../../style/themes/purple.json";
 import greenTheme from "../../style/themes/green.json";
 import oledTheme from "../../style/themes/oled.json";
 
-
 import Settings from "../Settings";
 import { CloudthemesStatus, Style } from "../../types";
-import { Container, SettingsContainer, SettingsContentContainer } from "../../components/Container";
+import {
+  Container,
+  SettingsContainer,
+  SettingsContentContainer,
+} from "../../components/Container";
 import { Buttons } from "../../components/Buttons";
 
-import config from '../../config.json';
-import loading_spinner from '../../assets/loading-buffering.gif';
+import config from "../../config.json";
+import loading_spinner from "../../assets/loading-buffering.gif";
+
+const token = localStorage.getItem("token");
+let cloudsync_enabled: boolean = false;
+
+const uploadTheme = async (theme: Style) => {
+  try {
+    const request = await fetch(config.api_url + "/api/cloudthemes", {
+      method: "POST",
+      headers: {
+        Authorization: token || "",
+      },
+      body: JSON.stringify(theme),
+    });
+
+    if (!request.ok) {
+      const response = await request.json();
+      throw new Error(response);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 export default function SettingsThemes() {
   const [jsonTheme, setJsonTheme] = useState<Style | null>(null);
-  const [isTransparencyEnabled, setIsTransparencyEnabled] = useState<boolean>(false);
+  const [isTransparencyEnabled, setIsTransparencyEnabled] =
+    useState<boolean>(false);
   const [isCloudSyncEnabled, setIsCloudSyncEnabled] = useState<boolean>(false);
-  const [isCloudSyncEnabledLoading, setIsCloudSyncEnabledLoading] = useState<boolean>(false);
+  const [isCloudSyncEnabledLoading, setIsCloudSyncEnabledLoading] =
+    useState<boolean>(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -38,7 +65,7 @@ export default function SettingsThemes() {
     }
   }, []);
 
-  const handleToggleTransparency = () => {
+  const handleToggleTransparency = async () => {
     setIsTransparencyEnabled((prev) => !prev);
     if (jsonTheme) {
       const updatedTheme = {
@@ -47,10 +74,12 @@ export default function SettingsThemes() {
       };
       setJsonTheme(updatedTheme);
       localStorage.setItem("theme", JSON.stringify(updatedTheme));
+      if (cloudsync_enabled) {
+        await uploadTheme(updatedTheme);
+      }
+
     }
   };
-
-  const token = localStorage.getItem("token");
 
   const cloudSync = async () => {
     try {
@@ -58,25 +87,26 @@ export default function SettingsThemes() {
         const result = await fetch(config.api_url + "/api/cloudthemes/status", {
           method: "GET",
           headers: {
-              "Authorization": token
-          }
+            Authorization: token,
+          },
         });
 
         if (!result.ok) {
           const response = await result.json();
-          throw new Error(response.error)
+          throw new Error(response.error);
         }
 
         const response: CloudthemesStatus = await result.json();
         console.log(response);
         setIsCloudSyncEnabled(response.enabled);
+        cloudsync_enabled = response.enabled;
       } else {
         throw new Error("you are not signed in.");
       }
     } catch (e) {
       setError(String(e));
     }
-  }
+  };
 
   useEffect(() => {
     cloudSync();
@@ -89,13 +119,13 @@ export default function SettingsThemes() {
         const result = await fetch(config.api_url + "/api/cloudthemes/status", {
           method: "POST",
           headers: {
-            "Authorization": token
+            Authorization: token,
           },
           body: JSON.stringify({
-            "enabled": e.target.checked
-          })
+            enabled: e.target.checked,
+          }),
         });
-        
+
         if (!result.ok) {
           const response = await result.json();
           throw new Error(response.error);
@@ -105,77 +135,80 @@ export default function SettingsThemes() {
 
         setIsCloudSyncEnabled(response.enabled);
         setIsCloudSyncEnabledLoading(false);
-        
+        cloudsync_enabled = response.enabled;
       }
     } catch (e) {
       setError(String(e));
       setIsCloudSyncEnabledLoading(false);
     }
-  }
+  };
 
   return (
     <div>
       <TopBar />
       <Container>
         <SettingsContainer>
-            <Settings />
-            <SettingsContentContainer>
-                <div className="settings-content-container-inner">
-                  <h2>Themes</h2>
-                  <hr />
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="mt-3 flex gap-1 mb-3">
-                        <p className="text-2xl">Transparency effects</p>
-                        <p className="content-center">
-                          <small>(requires refresh)</small>
-                        </p>
-                      </div>
-                      <div className="content-center mt-1">
-                        <Buttons.Toggle 
-                          checked={isTransparencyEnabled}
-                          onChange={handleToggleTransparency}
-                        />
-                      </div>
-                    </div>
-                    <hr />
-                    <details>
-                      <summary>
-                        Accent Color <small>(requires refresh)</small>
-                      </summary>
-                      <SelectableColorBox />
-                    </details>
-                    <br />
-                    <hr/>
-                    <div className="flex justify-between mt-2">
-                      <div>
-                        <p className="text-2xl">Cloud Sync</p>
-                        <p>
-                          <small>Sync your current selected theme with the acid4sigmas cloud servers</small>
-                        </p>
-                      </div>
-                      <div className="content-center">
-                        <div className="flex gap-2">
-                          {isCloudSyncEnabledLoading ? 
-                            (
-                            <div>
-                              <img className="w-8" src={loading_spinner}></img>
-                            </div>
-                            )
-                            :
-                            (<div></div>)
-                          }
-                          <Buttons.Toggle checked={isCloudSyncEnabled} onChange={handleCloudSync}/>
-                        </div>
-                      </div>
-                    </div>
-                    <br/>
-                    <hr />
-                    <br />
-                    <p>{error}</p>
+          <Settings />
+          <SettingsContentContainer>
+            <div className="settings-content-container-inner">
+              <h2>Themes</h2>
+              <hr />
+              <div>
+                <div className="flex justify-between">
+                  <div className="mt-3 flex gap-1 mb-3">
+                    <p className="text-2xl">Transparency effects</p>
+                    <p className="content-center">
+                      <small>(requires refresh)</small>
+                    </p>
+                  </div>
+                  <div className="content-center mt-1">
+                    <Buttons.Toggle
+                      checked={isTransparencyEnabled}
+                      onChange={handleToggleTransparency}
+                    />
                   </div>
                 </div>
-            
+                <hr />
+                <details>
+                  <summary>
+                    Accent Color <small>(requires refresh)</small>
+                  </summary>
+                  <SelectableColorBox />
+                </details>
+                <br />
+                <hr />
+                <div className="flex justify-between mt-2">
+                  <div>
+                    <p className="text-2xl">Cloud Sync</p>
+                    <p>
+                      <small>
+                        Sync your current selected theme with the acid4sigmas
+                        cloud servers
+                      </small>
+                    </p>
+                  </div>
+                  <div className="content-center">
+                    <div className="flex gap-2">
+                      {isCloudSyncEnabledLoading ? (
+                        <div>
+                          <img className="w-8" src={loading_spinner}></img>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                      <Buttons.Toggle
+                        checked={isCloudSyncEnabled}
+                        onChange={handleCloudSync}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <hr />
+                <br />
+                <p>{error}</p>
+              </div>
+            </div>
           </SettingsContentContainer>
         </SettingsContainer>
       </Container>
@@ -197,7 +230,7 @@ const SelectableColorBox = () => {
     yellowColor,
     purpleColor,
     greenColor,
-    blackColor
+    blackColor,
   ];
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
 
@@ -215,8 +248,10 @@ const SelectableColorBox = () => {
     yellow: yellow_theme,
     purple: purple_theme,
     green: green_theme,
-    black: oled_theme
+    black: oled_theme,
   };
+
+
 
   const toggleSelection = (color: Color) => {
     const newColor: Color | null = color === selectedColor ? null : color;
@@ -230,6 +265,10 @@ const SelectableColorBox = () => {
       if (selectedTheme) {
         console.log(selectedTheme);
         localStorage.setItem("theme", JSON.stringify(selectedTheme));
+        if (cloudsync_enabled) {
+          console.log("cloud sync is enabled");
+          uploadTheme(selectedTheme);
+        }
         window.location.reload();
       } else {
         console.log("Unknown theme.");
