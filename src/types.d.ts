@@ -38,3 +38,25 @@ export interface CloudTheme {
   uid: bigint;
   theme: Style;
 }
+
+
+interface Repo {
+  name: string;
+  forks: number;
+  language: string | null;
+  owner: RepoOwner;
+  html_url: string;
+}
+
+interface RepoOwner {
+  login: string;
+  html_url: string;
+}
+
+export interface RepoInfo {
+  languages: {
+    [key: string]: number;
+  },
+  repo: Repo;
+}
+
